@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:felimma/db/users.dart';
+import 'package:felimma/provider/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

@@ -19,9 +19,9 @@ class UserProvider with ChangeNotifier {
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
+  Firestore _firestore = Firestore.instance;
   UserServices _userServices = UserServices();
   OrderServices _orderServices = OrderServices();
-
   UserModel _userModel;
 
 //  getter
@@ -33,6 +33,10 @@ class UserProvider with ChangeNotifier {
 
   // public variables
   List<OrderModel> orders = [];
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController name = TextEditingController();
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onStateChanged);
@@ -59,13 +63,13 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        _userServices.createUser({
+        _firestore.collection('users').document(user.uid).setData({
           'name': name,
           'email': email,
           'uid': user.uid,
           'phoneNumber' : phoneNumber,
           'address' : address,
-          //user
+          //.user
           'stripeId': ''
         });
       });
@@ -78,12 +82,20 @@ class UserProvider with ChangeNotifier {
     }
   }
 
+
+
   Future signOut() async {
     _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
     return Future.delayed(Duration.zero);
   }
+
+  Future<void> reloadUserModel()async{
+    _userModel = await _userServices.getUserById(user.uid);
+    notifyListeners();
+  }
+
 
   Future<void> _onStateChanged(FirebaseUser user) async {
     if (user == null) {
@@ -96,8 +108,9 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> addToCart(
-      {ProductModel product, String duration,}) async {
+  Future<bool> addToCart({ProductModel product, String duration})async{
+    print("THE SERVICE IS: ${product.toString()}");
+    print("THE DUR IS: ${duration.toString()}");
     try {
       var uuid = Uuid();
       String cartItemId = uuid.v4();
@@ -147,8 +160,4 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> reloadUserModel()async{
-    _userModel = await _userServices.getUserById(user.uid);
-    notifyListeners();
-  }
 }
