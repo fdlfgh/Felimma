@@ -1,5 +1,5 @@
 import 'package:felimma/provider/app.dart';
-import 'package:felimma/provider/product.dart';
+import 'package:felimma/provider/service.dart';
 import 'package:felimma/provider/user.dart';
 import 'package:felimma/components/pages/home.dart';
 import 'package:felimma/components/pages/login.dart';
@@ -11,7 +11,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: UserProvider.initialize()),
-    ChangeNotifierProvider.value(value: ProductProvider.initialize()),
+    ChangeNotifierProvider.value(value: ServiceProvider.initialize()),
     ChangeNotifierProvider.value(value: AppProvider()),
 
 

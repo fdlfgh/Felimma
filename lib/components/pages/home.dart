@@ -1,12 +1,12 @@
 import 'package:felimma/helpers/common.dart';
 import 'package:felimma/helpers/style.dart';
-import 'package:felimma/provider/product.dart';
+import 'package:felimma/provider/service.dart';
 import 'package:felimma/provider/user.dart';
-import 'package:felimma/components/pages/product_search.dart';
-import 'package:felimma/services/product.dart';
+import 'package:felimma/components/pages/service_search.dart';
+import 'package:felimma/services/service.dart';
 import 'package:felimma/widgets/custom_text.dart';
-import 'package:felimma/widgets/featured_products.dart';
-import 'package:felimma/widgets/product_card.dart';
+import 'package:felimma/widgets/featured_services.dart';
+import 'package:felimma/widgets/service_card.dart';
 import 'package:felimma/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -22,12 +22,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _key = GlobalKey<ScaffoldState>();
-  ProductServices _productServices = ProductServices();
+  ServiceServices _serviceServices = ServiceServices();
 
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final productProvider = Provider.of<ProductProvider>(context);
+    final serviceProvider = Provider.of<ServiceProvider>(context);
 
     return Scaffold(
       key: _key,
@@ -144,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                     title: TextField(
                       textInputAction: TextInputAction.search,
                       onSubmitted: (pattern)async{
-                        await productProvider.search(productName: pattern);
-                        changeScreen(context, ProductSearchScreen());
+                        await serviceProvider.search(serviceName: pattern);
+                        changeScreen(context, ServiceSearchScreen());
                       },
                       decoration: InputDecoration(
                         hintText: "Photographers, MUA...",
@@ -157,37 +157,37 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-//            featured products
+//            featured services
             Row(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
                       alignment: Alignment.centerLeft,
-                      child: new Text('Featured products')),
+                      child: new Text('Featured services')),
                 ),
               ],
             ),
-            FeaturedProducts(),
+            FeaturedServices(),
 
-//          recent products
+//          recent services
             Row(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
                       alignment: Alignment.centerLeft,
-                      child: new Text('Recent products'),
+                      child: new Text('Recent services'),
                   ),
                 ),
               ],
             ),
 
             Column(
-              children: productProvider.products
+              children: serviceProvider.services
                   .map((item) => GestureDetector(
-                child: ProductCard(
-                  product: item,
+                child: ServiceCard(
+                  service: item,
 
                 ),
               ))

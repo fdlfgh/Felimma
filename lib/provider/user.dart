@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:felimma/models/cart_item.dart';
 import 'package:felimma/models/order.dart';
-import 'package:felimma/models/product.dart';
+import 'package:felimma/models/service.dart';
 import 'package:felimma/models/user.dart';
 import 'package:felimma/services/order.dart';
 import 'package:felimma/services/users.dart';
@@ -108,8 +108,8 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> addToCart({ProductModel product, String duration})async{
-    print("THE SERVICE IS: ${product.toString()}");
+  Future<bool> addToCart({ServiceModel service, String duration})async{
+    print("THE SERVICE IS: ${service.toString()}");
     print("THE DUR IS: ${duration.toString()}");
     try {
       var uuid = Uuid();
@@ -118,14 +118,14 @@ class UserProvider with ChangeNotifier {
 
       Map cartItem = {
         "id": cartItemId,
-        "name": product.name,
-        "image": product.picture,
-        "productId": product.id,
-        "price": product.price,
-        "duration": product.duration,
-        "description": product.description,
-        "phoneNumber" : product.phoneNumber,
-        "address": product.address,
+        "name": service.name,
+        "image": service.image,
+        "serviceId": service.id,
+        "price": service.price,
+        "duration": service.duration,
+        "description": service.description,
+        "phoneNumber" : service.phoneNumber,
+        "address": service.address,
 
       };
 
@@ -143,7 +143,7 @@ class UserProvider with ChangeNotifier {
   }
 
   Future<bool> removeFromCart({CartItemModel cartItem})async{
-    print("THE PRODUCT IS: ${cartItem.toString()}");
+    print("THE SERVICE IS: ${cartItem.toString()}");
 
     try{
       _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);

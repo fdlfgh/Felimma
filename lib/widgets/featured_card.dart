@@ -1,14 +1,14 @@
 import 'package:felimma/helpers/common.dart';
-import 'package:felimma/models/product.dart';
-import 'package:felimma/components/pages/product_details.dart';
+import 'package:felimma/models/service.dart';
+import 'package:felimma/components/pages/service_details.dart';
 import 'package:felimma/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class FeaturedCard extends StatelessWidget {
-  final ProductModel product;
+  final ServiceModel service;
 
-  const FeaturedCard({Key key, this.product}) : super(key: key);
+  const FeaturedCard({Key key, this.service}) : super(key: key);
 
 
   @override
@@ -17,7 +17,7 @@ class FeaturedCard extends StatelessWidget {
       padding: EdgeInsets.all(4),
       child: InkWell(
         onTap: (){
-          changeScreen(context, ProductDetails(product: product,));
+          changeScreen(context, ServiceDetails(service: service,));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -42,7 +42,7 @@ class FeaturedCard extends StatelessWidget {
                 Center(
                   child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
-                    image: product.picture,
+                    image: service.image,
                     fit: BoxFit.cover,
                     height: 220,
                     width: 200,
@@ -87,8 +87,8 @@ class FeaturedCard extends StatelessWidget {
                   child: Padding(
                       padding: const EdgeInsets.only(left:8.0),
                       child: RichText(text: TextSpan(children: [
-                        TextSpan(text: '${product.name} \n', style: TextStyle(fontSize: 18)),
-                        TextSpan(text: '\$${product.price / 100} \n', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        TextSpan(text: '${service.name} \n', style: TextStyle(fontSize: 18)),
+                        TextSpan(text: '\$${service.price / 100} \n', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
 
                       ]))
                   ),
