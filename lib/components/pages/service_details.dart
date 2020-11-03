@@ -224,8 +224,8 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                                 child: DropdownButton<String>(
                                     value: _duration,
                                     style: TextStyle(color: white),
-                                    items: widget.service.duration
-                                        .map<DropdownMenuItem<String>>(
+                                    items: widget.service.duration.map
+                                        <DropdownMenuItem<String>>(
                                             (value) => DropdownMenuItem(
                                             value: value,
                                             child: CustomText(

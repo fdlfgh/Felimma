@@ -24,7 +24,7 @@ class ServiceModel {
   bool _onSale;
   String _phoneNumber;
   String _client;
-  String _duration;
+  List _duration;
   String _category;
   String _image;
   String _description;
@@ -41,7 +41,7 @@ class ServiceModel {
 
   String get address => _address;
 
-  String get duration => _duration;
+  List get duration => _duration;
 
   String get phoneNumber => _phoneNumber;
 
@@ -59,7 +59,6 @@ class ServiceModel {
 
 
 
-  double get rating => _rating;
 
   int get price => _price;
 
@@ -67,7 +66,7 @@ class ServiceModel {
 
 
   // public variable
-  bool liked = false;
+  //bool liked = false;
 
   ServiceModel.fromSnapshot(DocumentSnapshot snapshot) {
     _id = snapshot.data[ID];

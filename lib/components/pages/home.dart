@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                         changeScreen(context, ServiceSearchScreen());
                       },
                       decoration: InputDecoration(
-                        hintText: "Photographers, MUA...",
+                        hintText: "Photographers, Models, MUA...",
                         border: InputBorder.none,
                       ),
                     ),
