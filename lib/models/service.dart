@@ -14,7 +14,7 @@ class ServiceModel {
   static const ADDRESS = "address";
   static const CATEGORY = "category";
   static const FEATURED = "featured";
-  static const SALE = "onSale";
+  static const ONSALE = "onSale";
 
 
   String _id;
@@ -24,7 +24,7 @@ class ServiceModel {
   bool _onSale;
   String _phoneNumber;
   String _client;
-  List _duration;
+  String _duration;
   String _category;
   String _image;
   String _description;
@@ -41,7 +41,7 @@ class ServiceModel {
 
   String get address => _address;
 
-  List get duration => _duration;
+  String get duration => _duration;
 
   String get phoneNumber => _phoneNumber;
 
@@ -72,7 +72,7 @@ class ServiceModel {
     _id = snapshot.data[ID];
     _image = snapshot.data[IMAGE];
     _client = snapshot.data[CLIENT];
-    _onSale = snapshot.data[SALE];
+    _onSale = snapshot.data[ONSALE];
     _address = snapshot.data[ADDRESS];
     _phoneNumber = snapshot.data[PHONENUMBER];
     _duration = snapshot.data[DURATION];

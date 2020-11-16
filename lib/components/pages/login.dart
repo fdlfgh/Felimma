@@ -13,6 +13,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
+  bool hidePass = true;
 
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
@@ -45,13 +46,24 @@ class _LoginState extends State<Login> {
                       children: <Widget>[
                         SizedBox(height: 40,),
                         Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Container(
                               alignment: Alignment.topCenter,
-                              child: Image.asset(
-                                'images/logo.png',
-                                width: 260.0,
-                              )),
+                            child: Text(
+                              'Welcome to Felimma',
+                              style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                      blurRadius: 1.0,
+                                      color: Colors.grey,
+                                      offset: Offset(1.0, 1.0),
+                                    ),
+                                  ],
+                                  fontSize: 50,
+                                  color: Colors.deepPurple,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
                         ),
 
                         Padding(
@@ -96,6 +108,7 @@ class _LoginState extends State<Login> {
                               padding: const EdgeInsets.only(left: 12.0),
                               child: TextFormField(
                                 controller: _password,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
                                   hintText: "Password",

@@ -109,8 +109,15 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(23.0),
                   child: Text(
-                    'Welcome to Felimma!',
+                    'Welcome to Felimma',
                     style: TextStyle(
+                        shadows: [
+                          Shadow(
+                            blurRadius: 1.0,
+                            color: Colors.grey,
+                            offset: Offset(1.0, 1.0),
+                          ),
+                        ],
                         fontSize: 60,
                         color: Colors.deepPurple,
                         fontWeight: FontWeight.w600),
@@ -120,7 +127,7 @@ class _HomePageState extends State<HomePage> {
             ),
 
 //          Search Text field
-//            Search(),
+            //Search(),
 
             Container(
               decoration: BoxDecoration(

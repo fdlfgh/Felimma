@@ -64,11 +64,16 @@ class ServiceCard extends StatelessWidget {
                 text: TextSpan(children: [
                   TextSpan(
                     text: '${service.name} \n',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+
                   ),
                   TextSpan(
-                    text: '\$${service.price / 100} \t',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    text: '${service.category} \n',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  TextSpan(
+                    text: 'RP${service.price} \t',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
                   ),
                   TextSpan(
                     text: service.onSale ? 'ON SALE ' : "",
@@ -87,8 +92,8 @@ class ServiceCard extends StatelessWidget {
     );
   }
 
-  Widget _serviceImage(String picture) {
-    if (picture == null) {
+  Widget _serviceImage(String image) {
+    if (image == null) {
       return Container(
         child: CustomText(text: "No Image"),
       );

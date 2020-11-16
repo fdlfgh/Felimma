@@ -17,6 +17,7 @@ class ServiceProvider with ChangeNotifier{
     notifyListeners();
   }
 
+
   Future search({String serviceName})async{
     servicesSearched = await _serviceServices.searchServices(serviceName: serviceName);
     notifyListeners();

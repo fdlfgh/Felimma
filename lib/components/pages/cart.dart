@@ -6,8 +6,12 @@ import 'package:felimma/services/order.dart';
 import 'package:felimma/widgets/custom_text.dart';
 import 'package:felimma/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+
+const CHANNEL = "com.example.felimma";
+const KEY_NATIVE = "showFelimma";
 
 class CartScreen extends StatefulWidget {
   @override
@@ -17,6 +21,30 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final _key = GlobalKey<ScaffoldState>();
   OrderServices _orderServices = OrderServices();
+
+  static const platform = const MethodChannel(CHANNEL);
+
+  Future<Null> showNativeView({
+      //user
+      userId,
+      userFullName,
+      email,
+      phone,
+      // item
+      productDetails,
+      totalCart,
+      deliveryFee
+      }) async {
+    await platform.invokeMethod(KEY_NATIVE, {
+      "productDetails": productDetails,
+      "totalCart": totalCart,
+      "deliveryFee": deliveryFee,
+      "userId": userId,
+      "userFullName": userFullName,
+      "email": email,
+      "phone": phone,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +112,15 @@ class _CartScreenState extends State<CartScreen> {
                                       "\n",
                                   style: TextStyle(
                                       color: black,
-                                      fontSize: 20,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold)),
                               TextSpan(
                                   text:
-                                  "\$${userProvider.userModel.cart[index].price / 100} \n\n",
+                                  "RP${userProvider.userModel.cart[index].price} \n\n",
                                   style: TextStyle(
-                                      color: black,
+                                      color: green,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w300)),
+                                      fontWeight: FontWeight.bold)),
                             ]),
                           ),
                           IconButton(
@@ -141,11 +169,11 @@ class _CartScreenState extends State<CartScreen> {
                           fontSize: 22,
                           fontWeight: FontWeight.w400)),
                   TextSpan(
-                      text: " \$${userProvider.userModel.totalCartPrice / 100}",
+                      text: "RP${userProvider.userModel.totalCartPrice}",
                       style: TextStyle(
-                          color: black,
+                          color: green,
                           fontSize: 22,
-                          fontWeight: FontWeight.normal)),
+                          fontWeight: FontWeight.bold)),
                 ]),
               ),
               Container(
@@ -176,7 +204,7 @@ class _CartScreenState extends State<CartScreen> {
                                           MainAxisAlignment.center,
                                           children: <Widget>[
                                             Text(
-                                              'Your cart is emty',
+                                              'Your cart is empty',
                                               textAlign: TextAlign.center,
                                             ),
                                           ],
@@ -213,40 +241,31 @@ class _CartScreenState extends State<CartScreen> {
                                         width: 320.0,
                                         child: RaisedButton(
                                           onPressed: () async {
-                                            var uuid = Uuid();
-                                            String id = uuid.v4();
-                                            _orderServices.createOrder(
-                                                userId: userProvider.user.uid,
-                                                id: id,
-                                                description:
-                                                "Some random description",
-                                                status: "complete",
-                                                totalPrice: userProvider
-                                                    .userModel.totalCartPrice,
-                                                cart: userProvider
-                                                    .userModel.cart);
-                                            for (CartItemModel cartItem
-                                            in userProvider
-                                                .userModel.cart) {
-                                              bool value = await userProvider
-                                                  .removeFromCart(
-                                                  cartItem: cartItem);
-                                              if (value) {
-                                                userProvider.reloadUserModel();
-                                                print("Item added to cart");
-                                                _key.currentState.showSnackBar(
-                                                    SnackBar(
-                                                        content: Text(
-                                                            "Removed from Cart!")));
-                                              } else {
-                                                print("ITEM WAS NOT REMOVED");
-                                              }
-                                            }
-                                            _key.currentState.showSnackBar(
-                                                SnackBar(
-                                                    content: Text(
-                                                        "Order created!")));
                                             Navigator.pop(context);
+                                            var productDetails = [];
+                                            for(int i = 0; i < userProvider.userModel.cart.length; i++){
+                                              productDetails.add({
+                                                "id": userProvider.userModel.cart[i].id.toString(),
+                                                "name": userProvider.userModel.cart[i].name.replaceAll(" ", "_"),
+                                                "price": userProvider.userModel.cart[i].price.toString(),
+                                                "qty": 1.toString(),
+                                                "deliveryFee": userProvider.userModel.cart[i].price / 100
+                                              });
+                                            }
+                                            showNativeView(
+                                              userId: userProvider.userModel.id,
+                                              userFullName: userProvider.userModel.name,
+                                              email: userProvider.userModel.email,
+                                              phone: userProvider.userModel.phoneNumber,
+                                              productDetails: productDetails,
+                                              totalCart: userProvider.userModel.totalCartPrice,
+                                              deliveryFee: userProvider.userModel.totalCartPrice / 100
+                                            );
+
+                                            // _key.currentState.showSnackBar(
+                                            //     SnackBar(
+                                            //         content: Text(
+                                            //             "Order!")));
                                           },
                                           child: Text(
                                             "Accept",

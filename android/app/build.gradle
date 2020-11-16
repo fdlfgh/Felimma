@@ -47,6 +47,25 @@ android {
         multiDexEnabled true
     }
 
+    flavorDimensions "versionCode"
+
+    productFlavors {
+//      mode pengembang
+        sandbox {
+            buildConfigField "String", "MERCHANT_BASE_URL", "\"https://testfelimma.herokuapp.com/index.php/\""
+            buildConfigField "String", "MERCHANT_CLIENT_KEY", "\"SB-Mid-client-W2kBukmb7smAM8wl\""
+        }
+
+//      mode produksi
+//        production {
+////            dimension = "mode"
+//            applicationId "com.example.felimma"
+//            resValue "string", "app_name", "felimma Production"
+//            buildConfigField "String", "MERCHANT_BASE_URL", "\"https://testfelimma.herokuapp.com/index.php/\""
+//            buildConfigField "String", "MERCHANT_CLIENT_KEY", "\"SB-Mid-client-W2kBukmb7smAM8wl\""
+//        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
@@ -67,5 +86,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'com.midtrans:uikit:1.24.1-SANDBOX'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 }
 apply plugin: 'com.google.gms.google-services'

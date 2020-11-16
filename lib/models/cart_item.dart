@@ -3,7 +3,7 @@ class CartItemModel {
   static const ID = "id";
   static const NAME = "name";
   static const IMAGE = "image";
-  static const PRODUCT_ID = "productId";
+  static const SERVICE_ID = "serviceId";
   static const PRICE = "price";
   static const DURATION = "duration";
 
@@ -11,7 +11,7 @@ class CartItemModel {
   String _id;
   String _name;
   String _image;
-  String _productId;
+  String _serviceId;
   String _duration;
   int _price;
 
@@ -22,7 +22,7 @@ class CartItemModel {
 
   String get image => _image;
 
-  String get productId => _productId;
+  String get serviceId => _serviceId;
 
   String get duration => _duration;
 
@@ -35,7 +35,7 @@ class CartItemModel {
     _id = data[ID];
     _name =  data[NAME];
     _image =  data[IMAGE];
-    _productId = data[PRODUCT_ID];
+    _serviceId = data[SERVICE_ID];
     _price = data[PRICE];
     _duration = data[DURATION];
   }
@@ -44,7 +44,7 @@ class CartItemModel {
     ID: _id,
     IMAGE: _image,
     NAME: _name,
-    PRODUCT_ID: _productId,
+    SERVICE_ID: _serviceId,
     PRICE: _price,
     DURATION: _duration,
   };

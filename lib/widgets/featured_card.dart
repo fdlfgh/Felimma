@@ -87,8 +87,8 @@ class FeaturedCard extends StatelessWidget {
                   child: Padding(
                       padding: const EdgeInsets.only(left:8.0),
                       child: RichText(text: TextSpan(children: [
-                        TextSpan(text: '${service.name} \n', style: TextStyle(fontSize: 18)),
-                        TextSpan(text: '\$${service.price / 100} \n', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+                        TextSpan(text: '${service.name} \n', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                        TextSpan(text: 'RP${service.price} \n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
 
                       ]))
                   ),

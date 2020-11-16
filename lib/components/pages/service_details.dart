@@ -59,7 +59,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                       ),
                     ),
                     Align(
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.topLeft,
                       child: Container(
                           height: 100,
                           decoration: BoxDecoration(
@@ -84,7 +84,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                               child: Container())),
                     ),
                     Align(
-                      alignment: Alignment.bottomCenter,
+                      alignment: Alignment.topLeft,
                       child: Container(
                           height: 400,
                           decoration: BoxDecoration(
@@ -130,11 +130,11 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                               Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
-                                  '\$${widget.service.price / 100}',
+                                  'RP${widget.service.price}/${widget.service.duration}Hrs',
                                   textAlign: TextAlign.end,
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 26,
+                                      color: Colors.green,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
@@ -208,7 +208,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                     child: Column(
                       children: <Widget>[
 
-                        Padding(
+                        /*Padding(
                           padding: const EdgeInsets.all(0),
                           child: Row(
                             children: <Widget>[
@@ -241,13 +241,62 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                               )
                             ],
                           ),
-                        ),
+                        ),*/
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                                'Description:\nLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s  Lorem Ipsum has been the industry standard dummy text ever since the 1500s ',
-                                style: TextStyle(color: Colors.white)),
+
+                                '${widget.service.client}',textAlign: TextAlign.left,
+                                style: TextStyle(color: Colors.white, fontSize: 20, ),
+                            )
+                            ,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: Text(
+
+                              'Category : ${widget.service.category}',
+                              style: TextStyle(color: Colors.white, ),
+                              textAlign: TextAlign.left,
+                            )
+                            ,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(1.0),
+                            child: Text(
+
+                              widget.service.description,
+                              style: TextStyle(color: Colors.white, ),
+                              textAlign: TextAlign.left,
+                            )
+                            ,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(9.0),
+                            child: Text(
+                              widget.service.address,
+                              style: TextStyle(color: Colors.white, ),
+                              textAlign: TextAlign.left,
+                            )
+                            ,
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+
+                            child: Text(
+
+                              widget.service.phoneNumber,
+                              style: TextStyle(color: Colors.white, ),
+                            ),
                           ),
                         ),
                         Padding(
