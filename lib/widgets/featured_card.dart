@@ -10,21 +10,23 @@ class FeaturedCard extends StatelessWidget {
 
   const FeaturedCard({Key key, this.service}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(4),
       child: InkWell(
-        onTap: (){
-          changeScreen(context, ServiceDetails(service: service,));
+        onTap: () {
+          changeScreen(
+              context,
+              ServiceDetails(
+                service: service,
+              ));
         },
         child: Container(
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color:
-                Color.fromARGB(62, 168, 174, 201),
+                color: Color.fromARGB(62, 168, 174, 201),
                 offset: Offset(0, 9),
                 blurRadius: 14,
               ),
@@ -36,9 +38,9 @@ class FeaturedCard extends StatelessWidget {
               children: <Widget>[
                 Positioned.fill(
                     child: Align(
-                      alignment: Alignment.center,
-                      child: Loading(),
-                    )),
+                  alignment: Alignment.center,
+                  child: Loading(),
+                )),
                 Center(
                   child: FadeInImage.memoryNetwork(
                     placeholder: kTransparentImage,
@@ -48,7 +50,6 @@ class FeaturedCard extends StatelessWidget {
                     width: 200,
                   ),
                 ),
-
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -75,25 +76,53 @@ class FeaturedCard extends StatelessWidget {
                           ],
                         ),
                       ),
-
                       child: Padding(
                           padding: const EdgeInsets.only(top: 8.0),
-                          child: Container()
-                      )),
+                          child: Container())),
                 ),
-
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Padding(
-                      padding: const EdgeInsets.only(left:8.0),
-                      child: RichText(text: TextSpan(children: [
-                        TextSpan(text: '${service.name} \n', style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                        TextSpan(text: 'RP${service.price} \n', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
-
-                      ]))
-                  ),
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                            text: '${service.name} \n',
+                            style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 1.0,
+                                    color: Colors.black,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                fontSize: 15, fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: '${service.client} \n',
+                            style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 1.0,
+                                    color: Colors.black,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                fontSize: 15, fontWeight: FontWeight.bold)),
+                        TextSpan(
+                            text: 'RP${service.price} \n',
+                            style: TextStyle(
+                                shadows: [
+                                  Shadow(
+                                    blurRadius: 1.0,
+                                    color: Colors.black,
+                                    offset: Offset(1.0, 1.0),
+                                  ),
+                                ],
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white)),
+                      ]))),
                 )
-
               ],
             ),
           ),

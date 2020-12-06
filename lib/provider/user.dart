@@ -12,7 +12,6 @@ import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:uuid/uuid.dart';
 
-
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class UserProvider with ChangeNotifier {
@@ -56,7 +55,14 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> signUp(String name, String email, String password, String address, String phoneNumber) async {
+  Future<bool> signUp(
+      String name,
+      String email,
+      String password,
+      String address,
+      String phoneNumber,
+      String postalCode,
+      String city) async {
     try {
       _status = Status.Authenticating;
       notifyListeners();
@@ -67,8 +73,10 @@ class UserProvider with ChangeNotifier {
           'name': name,
           'email': email,
           'uid': user.uid,
-          'phoneNumber' : phoneNumber,
-          'address' : address,
+          'phoneNumber': phoneNumber,
+          'postalCode': postalCode,
+          'city': city,
+          'address': address,
           //.user
           'stripeId': ''
         });
@@ -82,8 +90,6 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-
-
   Future signOut() async {
     _auth.signOut();
     _status = Status.Unauthenticated;
@@ -91,11 +97,10 @@ class UserProvider with ChangeNotifier {
     return Future.delayed(Duration.zero);
   }
 
-  Future<void> reloadUserModel()async{
+  Future<void> reloadUserModel() async {
     _userModel = await _userServices.getUserById(user.uid);
     notifyListeners();
   }
-
 
   Future<void> _onStateChanged(FirebaseUser user) async {
     if (user == null) {
@@ -108,7 +113,7 @@ class UserProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> addToCart({ServiceModel service, String duration})async{
+  Future<bool> addToCart({ServiceModel service, String duration}) async {
     print("THE SERVICE IS: ${service.toString()}");
     print("THE DUR IS: ${duration.toString()}");
     try {
@@ -124,9 +129,8 @@ class UserProvider with ChangeNotifier {
         "price": service.price,
         "duration": service.duration,
         "description": service.description,
-        "phoneNumber" : service.phoneNumber,
+        "phoneNumber": service.phoneNumber,
         "address": service.address,
-
       };
 
       CartItemModel item = CartItemModel.fromMap(cartItem);
@@ -142,22 +146,20 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> removeFromCart({CartItemModel cartItem})async{
+  Future<bool> removeFromCart({CartItemModel cartItem}) async {
     print("THE SERVICE IS: ${cartItem.toString()}");
 
-    try{
+    try {
       _userServices.removeFromCart(userId: _user.uid, cartItem: cartItem);
       return true;
-    }catch(e){
+    } catch (e) {
       print("THE ERROR ${e.toString()}");
       return false;
     }
-
   }
 
-  getOrders()async{
+  getOrders() async {
     orders = await _orderServices.getUserOrders(userId: _user.uid);
     notifyListeners();
   }
-
 }

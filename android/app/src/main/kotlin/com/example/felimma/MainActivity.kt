@@ -67,23 +67,31 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback{
     }
 
     override fun onTransactionFinished(p0: TransactionResult?) {
+        val channel = MethodChannel(flutterEngine?.dartExecutor?.binaryMessenger, "channelFromKotlin")
+
         if (p0?.response != null){
             when(p0.status){
-                TransactionResult.STATUS_SUCCESS ->
+                TransactionResult.STATUS_SUCCESS -> {
+                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
                     Toast.makeText(
                             this,
                             "Transaction Finished ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
                             .show()
-                TransactionResult.STATUS_PENDING ->
+                }
+                TransactionResult.STATUS_PENDING -> {
+                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
                     Toast.makeText(
                             this,
                             "Transaction Pending ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
                             .show()
-                TransactionResult.STATUS_FAILED ->
+                }
+                TransactionResult.STATUS_FAILED -> {
+                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
                     Toast.makeText(
                             this,
                             "Transaction Failed ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
                             .show()
+                }
             }
             p0.response.validationMessages
         }else if(p0!!.isTransactionCanceled){

@@ -25,16 +25,21 @@ class OrdersScreen extends StatelessWidget {
       backgroundColor: white,
       body: ListView.builder(
           itemCount: userProvider.orders.length,
-          itemBuilder: (_, index){
+          itemBuilder: (_, index) {
             OrderModel _order = userProvider.orders[index];
             return ListTile(
               leading: CustomText(
-                text: "RP${_order.total / 100}",
+                text: "RP${_order.total}",
                 weight: FontWeight.bold,
               ),
               title: Text(_order.description),
-              subtitle: Text(DateTime.fromMillisecondsSinceEpoch(_order.createdAt).toString()),
-              trailing: CustomText(text: _order.status, color: green,),
+              subtitle: Text(
+                  DateTime.fromMillisecondsSinceEpoch(_order.createdAt)
+                      .toString()),
+              trailing: CustomText(
+                text: _order.status,
+                color: green,
+              ),
             );
           }),
     );

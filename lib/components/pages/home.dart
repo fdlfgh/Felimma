@@ -49,14 +49,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              onTap: () async{
+              onTap: () async {
                 await userProvider.getOrders();
                 changeScreen(context, OrdersScreen());
               },
               leading: Icon(Icons.bookmark_border),
               title: CustomText(text: "My orders"),
             ),
-
             ListTile(
               onTap: () {
                 userProvider.signOut();
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   child: Align(
                       alignment: Alignment.topRight,
                       child: GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             changeScreen(context, CartScreen());
                           },
                           child: Icon(Icons.shopping_cart))),
@@ -99,12 +98,13 @@ class _HomePageState extends State<HomePage> {
                   top: 10,
                   right: 100,
                   child: Align(
-                      alignment: Alignment.topRight, child: GestureDetector(
-                      onTap: (){
-                        _key.currentState.showSnackBar(SnackBar(
-                            content: Text("User profile")));
-                      },
-                      child: Icon(Icons.person))),
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                          onTap: () {
+                            _key.currentState.showSnackBar(
+                                SnackBar(content: Text("User profile")));
+                          },
+                          child: Icon(Icons.person))),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(23.0),
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                         fontSize: 60,
-                        color: Colors.deepPurple,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600),
                   ),
                 ),
@@ -150,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     title: TextField(
                       textInputAction: TextInputAction.search,
-                      onSubmitted: (pattern)async{
+                      onSubmitted: (pattern) async {
                         await serviceProvider.search(serviceName: pattern);
                         changeScreen(context, ServiceSearchScreen());
                       },
@@ -171,7 +171,11 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
                       alignment: Alignment.centerLeft,
-                      child: new Text('Featured services')),
+                      child: new Text('Featured services',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w800))),
                 ),
               ],
             ),
@@ -183,8 +187,12 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Container(
-                      alignment: Alignment.centerLeft,
-                      child: new Text('Recent services'),
+                    alignment: Alignment.centerLeft,
+                    child: new Text('Recent services',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800)),
                   ),
                 ),
               ],
@@ -193,11 +201,10 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: serviceProvider.services
                   .map((item) => GestureDetector(
-                child: ServiceCard(
-                  service: item,
-
-                ),
-              ))
+                        child: ServiceCard(
+                          service: item,
+                        ),
+                      ))
                   .toList(),
             )
           ],

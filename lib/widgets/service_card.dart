@@ -18,8 +18,12 @@ class ServiceCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: (){
-          changeScreen(context, ServiceDetails(service: service,));
+        onTap: () {
+          changeScreen(
+              context,
+              ServiceDetails(
+                service: service,
+              ));
         },
         child: Container(
           decoration: BoxDecoration(
@@ -41,9 +45,9 @@ class ServiceCard extends StatelessWidget {
                     children: <Widget>[
                       Positioned.fill(
                           child: Align(
-                            alignment: Alignment.center,
-                            child: Loading(),
-                          )),
+                        alignment: Alignment.center,
+                        child: Loading(),
+                      )),
                       Center(
                         child: FadeInImage.memoryNetwork(
                           placeholder: kTransparentImage,
@@ -64,8 +68,17 @@ class ServiceCard extends StatelessWidget {
                 text: TextSpan(children: [
                   TextSpan(
                     text: '${service.name} \n',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextSpan(
+                    text: '${service.client} \n',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   TextSpan(
                     text: '${service.category} \n',
@@ -73,11 +86,13 @@ class ServiceCard extends StatelessWidget {
                   ),
                   TextSpan(
                     text: 'RP${service.price} \t',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
                   ),
                   TextSpan(
                     text: service.onSale ? 'ON SALE ' : "",
-
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
