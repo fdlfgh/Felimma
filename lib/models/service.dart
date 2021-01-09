@@ -29,9 +29,7 @@ class ServiceModel {
   String _image;
   String _description;
 
-  double _rating;
   int _price;
-  int _rates;
 
   bool _featured;
 
@@ -82,7 +80,6 @@ class ServiceModel {
     _featured = snapshot.data[FEATURED];
     _price = snapshot.data[PRICE].floor();
     _category = snapshot.data[CATEGORY];
-    _rating = snapshot.data[RATING];
     _name = snapshot.data[NAME];
   }
 }

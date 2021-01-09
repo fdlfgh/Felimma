@@ -15,7 +15,10 @@ class OrdersScreen extends StatelessWidget {
         iconTheme: IconThemeData(color: black),
         backgroundColor: white,
         elevation: 0.0,
-        title: CustomText(text: "Orders"),
+        title: CustomText(
+            text: "Orders",
+            weight: FontWeight.bold,
+        ),
         leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
@@ -31,14 +34,19 @@ class OrdersScreen extends StatelessWidget {
               leading: CustomText(
                 text: "RP${_order.total}",
                 weight: FontWeight.bold,
+                color: green,
               ),
-              title: Text(_order.description),
+              title: Text(_order.status),
               subtitle: Text(
                   DateTime.fromMillisecondsSinceEpoch(_order.createdAt)
                       .toString()),
-              trailing: CustomText(
-                text: _order.status,
-                color: green,
+              trailing: FlatButton(
+                child: FlatButton(
+                  child: Text('Order Details'),
+                  onPressed: () {
+                    //changeScreen(context, OrderDetailScreen() );
+                  },
+                ),
               ),
             );
           }),

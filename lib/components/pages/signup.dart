@@ -56,34 +56,25 @@ class _SignUpState extends State<SignUp> {
                             SizedBox(
                               height: 40,
                             ),
-                            /*Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                            alignment: Alignment.topCenter,
-                            child: Image.asset(
-                              //'images/logo.png',
-                              width: 260.0,
-                            )),
-                      ),*/
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Container(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  'Join with us!',
-                                  style: TextStyle(
-                                      shadows: [
-                                        Shadow(
-                                          blurRadius: 1.0,
-                                          color: Colors.grey,
-                                          offset: Offset(1.0, 1.0),
-                                        ),
-                                      ],
-                                      fontSize: 60,
-                                      color: Colors.deepPurple,
-                                      fontWeight: FontWeight.w600),
-                                ),
+                              padding: const EdgeInsets.all(15.0),
+                              child: Text(
+                                '\nJoin with us!',
+                                style: TextStyle(
+                                    shadows: [
+                                      Shadow(
+                                        blurRadius: 1.0,
+                                        color: Colors.grey,
+                                        offset: Offset(1.0, 1.0),
+                                      ),
+                                    ],
+                                    fontSize: 45,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
                               ),
+                            ),
+                            SizedBox(
+                                height: 20
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(
@@ -103,7 +94,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return "The name field cannot be empty";
+                                          return "The full name field cannot be empty";
                                         }
                                         return null;
                                       },
@@ -131,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return "The name field cannot be empty";
+                                          return "The phone number field cannot be empty";
                                         }
                                         return null;
                                       },
@@ -158,7 +149,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return "The name field cannot be empty";
+                                          return "The city field cannot be empty";
                                         }
                                         return null;
                                       },
@@ -186,7 +177,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return "The name field cannot be empty";
+                                          return "The postal code field cannot be empty";
                                         }
                                         return null;
                                       },
@@ -214,7 +205,7 @@ class _SignUpState extends State<SignUp> {
                                           border: InputBorder.none),
                                       validator: (value) {
                                         if (value.isEmpty) {
-                                          return "The name field cannot be empty";
+                                          return "The address field cannot be empty";
                                         }
                                         return null;
                                       },
@@ -338,7 +329,7 @@ class _SignUpState extends State<SignUp> {
                                       Navigator.pop(context);
                                     },
                                     child: Text(
-                                      "I already have an account",
+                                      "I already have an account\n\n",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 16),

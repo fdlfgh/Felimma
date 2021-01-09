@@ -96,7 +96,7 @@ class FeaturedCard extends StatelessWidget {
                                     offset: Offset(1.0, 1.0),
                                   ),
                                 ],
-                                fontSize: 15, fontWeight: FontWeight.bold)),
+                                fontSize: 15, fontWeight: FontWeight.bold, color: Colors.white)),
                         TextSpan(
                             text: '${service.client} \n',
                             style: TextStyle(

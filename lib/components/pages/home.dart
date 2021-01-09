@@ -3,17 +3,18 @@ import 'package:felimma/helpers/style.dart';
 import 'package:felimma/provider/service.dart';
 import 'package:felimma/provider/user.dart';
 import 'package:felimma/components/pages/service_search.dart';
+import 'package:felimma/components/pages/map.dart';
 import 'package:felimma/services/service.dart';
 import 'package:felimma/widgets/custom_text.dart';
 import 'package:felimma/widgets/featured_services.dart';
 import 'package:felimma/widgets/service_card.dart';
-import 'package:felimma/widgets/search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:provider/provider.dart';
-
+import 'service_search.dart';
 import 'cart.dart';
 import 'order.dart';
+import 'user_profile.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -36,31 +37,45 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: Colors.deepPurple),
+              decoration: BoxDecoration(color: Colors.white),
               accountName: CustomText(
                 text: userProvider.userModel?.name ?? "username lading...",
-                color: white,
+                color: Colors.deepPurple,
                 weight: FontWeight.bold,
-                size: 18,
+                size: 25,
               ),
               accountEmail: CustomText(
                 text: userProvider.userModel?.email ?? "email loading...",
-                color: white,
+                color: black,
               ),
+            ),
+            ListTile(
+              onTap: () async {
+                changeScreen(context, UserProfileScreen());
+              },
+              leading: Icon(Icons.person, color: Colors.black),
+              title: CustomText(text: "Profile"),
             ),
             ListTile(
               onTap: () async {
                 await userProvider.getOrders();
                 changeScreen(context, OrdersScreen());
               },
-              leading: Icon(Icons.bookmark_border),
+              leading: Icon(Icons.bookmark_border, color: Colors.black),
               title: CustomText(text: "My orders"),
+            ),
+            ListTile(
+              onTap: () async {
+                changeScreen(context, CartScreen());
+              },
+              leading: Icon(Icons.shopping_cart, color: Colors.black),
+              title: CustomText(text: "Cart"),
             ),
             ListTile(
               onTap: () {
                 userProvider.signOut();
               },
-              leading: Icon(Icons.exit_to_app),
+              leading: Icon(Icons.exit_to_app, color: Colors.red),
               title: CustomText(text: "Log out"),
             ),
           ],
@@ -101,15 +116,14 @@ class _HomePageState extends State<HomePage> {
                       alignment: Alignment.topRight,
                       child: GestureDetector(
                           onTap: () {
-                            _key.currentState.showSnackBar(
-                                SnackBar(content: Text("User profile")));
+                            changeScreen(context, UserProfileScreen());
                           },
                           child: Icon(Icons.person))),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(23.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Text(
-                    'Welcome to Felimma',
+                    '\nFelimma',
                     style: TextStyle(
                         shadows: [
                           Shadow(
@@ -120,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                         fontSize: 60,
                         color: Colors.black,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -133,20 +147,20 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                   color: white,
                   borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(20),
-                      bottomLeft: Radius.circular(20))),
+                      bottomRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(15))),
               child: Padding(
                 padding: const EdgeInsets.only(
                     top: 1, left: 8, right: 8, bottom: 10),
                 child: Container(
                   decoration: BoxDecoration(
                     color: grey.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: ListTile(
                     leading: Icon(
                       Icons.search,
-                      color: black,
+                      color: Colors.black,
                     ),
                     title: TextField(
                       textInputAction: TextInputAction.search,
@@ -198,6 +212,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
+
             Column(
               children: serviceProvider.services
                   .map((item) => GestureDetector(
@@ -206,20 +221,31 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ))
                   .toList(),
-            )
+            ),
+            SizedBox(
+                height: 75
+            ),
           ],
         ),
       ),
+
+
+      /*floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.search, color: Colors.deepPurple,),
+        backgroundColor: Colors.white,
+        onPressed: () {
+          changeScreen(context, MapScreen());
+        },
+        label: Text('Search Service',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ),*/
+      floatingActionButtonLocation:
+      FloatingActionButtonLocation.endFloat,
     );
   }
 }
-/*Row(
-mainAxisAlignment: MainAxisAlignment.end,
-children: <Widget>[
-GestureDetector(
-onTap: (){
-key.currentState.openDrawer();
-},
-child: Icon(Icons.menu))
-],
-),*/

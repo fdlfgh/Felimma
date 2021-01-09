@@ -4,7 +4,6 @@ import 'package:felimma/models/service.dart';
 import 'package:felimma/provider/app.dart';
 import 'package:felimma/provider/user.dart';
 import 'package:felimma/components/pages/cart.dart';
-import 'package:felimma/widgets/custom_text.dart';
 import 'package:felimma/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -85,6 +84,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
+
                       child: Container(
                           height: 400,
                           decoration: BoxDecoration(
@@ -109,7 +109,9 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                           child: Padding(
                               padding: const EdgeInsets.only(top: 8.0),
                               child: Container())),
+
                     ),
+
                     Positioned(
                         bottom: 0,
                         child: Container(
@@ -150,21 +152,19 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                             changeScreen(context, CartScreen());
                           },
                           child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Card(
-                                elevation: 10,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20)),
+                              padding: const EdgeInsets.all(4.0),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Icon(Icons.shopping_cart),
+                                  padding: const EdgeInsets.all(12),
+                                  child: Icon(Icons.shopping_cart,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
                                 ),
                               )),
                         ),
                       ),
-                    ),
                     Positioned(
-                      top: 120,
+                      top: 0,
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: InkWell(
@@ -172,25 +172,20 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                             print("CLICKED");
                             Navigator.pop(context);
                           },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: red,
-                                borderRadius: BorderRadius.only(
-                                    bottomRight: Radius.circular(35))),
-                            child: Padding(
+                          child: Padding(
                                 padding: const EdgeInsets.all(4.0),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12),
                                   child: Icon(
                                     Icons.close,
                                     color: Colors.white,
+                                    size: 35,
                                   ),
                                 )),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
                 ),
                 Expanded(
                   child: Container(
@@ -206,42 +201,8 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                               blurRadius: 10)
                         ]),
                     child: Column(
-                      children: <Widget>[
 
-                        /*Padding(
-                          padding: const EdgeInsets.all(0),
-                          child: Row(
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
-                                child: CustomText(
-                                  text: "Select duration",
-                                  color: white,
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8),
-                                child: DropdownButton<String>(
-                                    value: _duration,
-                                    style: TextStyle(color: white),
-                                    items: widget.service.duration.map
-                                        <DropdownMenuItem<String>>(
-                                            (value) => DropdownMenuItem(
-                                            value: value,
-                                            child: CustomText(
-                                              text: value,
-                                              color: red,
-                                            )))
-                                        .toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        _duration = value;
-                                      });
-                                    }),
-                              )
-                            ],
-                          ),
-                        ),*/
+                      children: <Widget>[
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -339,11 +300,11 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                         ),
                         SizedBox(
                           height: 20,
-                        )
+                        ),
                       ],
+                    )
                     ),
                   ),
-                )
               ],
             ),
           )),

@@ -50,25 +50,48 @@ class _LoginState extends State<Login> {
                                 height: 40,
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.all(15.0),
+                                child: Text(
+                                  '\nFelimma',
+                                  style: TextStyle(
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 1.0,
+                                          color: Colors.grey,
+                                          offset: Offset(1.0, 1.0),
+                                        ),
+                                      ],
+                                      fontSize: 60,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
                                 child: Container(
                                   alignment: Alignment.topCenter,
                                   child: Text(
-                                    'Welcome to Felimma',
+                                    'Felimma is an app where you can find a photographers, model, and make up artist in one place.',
                                     style: TextStyle(
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 1.0,
-                                            color: Colors.grey,
-                                            offset: Offset(1.0, 1.0),
-                                          ),
-                                        ],
-                                        fontSize: 70,
+                                      shadows: [
+                                        Shadow(
+                                          blurRadius: 1.0,
+                                          color: Colors.grey,
+                                          offset: Offset(1.0, 1.0),
+                                        ),
+                                      ],
+                                        fontSize: 40,
                                         color: Colors.deepPurple,
-                                        fontWeight: FontWeight.w600),
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FontStyle.italic,
+                                    ),
                                   ),
                                 ),
                               ),
+
+                          SizedBox(
+                              height: 0
+                          ),
 
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(
@@ -165,17 +188,6 @@ class _LoginState extends State<Login> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      "Forgot password",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: black,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: InkWell(
                                           onTap: () {
@@ -193,28 +205,6 @@ class _LoginState extends State<Login> {
                                           ))),
                                 ],
                               ),
-
-//                        Padding(
-//                          padding: const EdgeInsets.all(16.0),
-//                          child: Row(
-//                            mainAxisAlignment: MainAxisAlignment.center,
-//                            children: <Widget>[
-//
-//                              Padding(
-//                                padding: const EdgeInsets.all(8.0),
-//                                child: Text("or sign in with", style: TextStyle(fontSize: 18,color: Colors.grey),),
-//                              ),
-//                              Padding(
-//                                padding: const EdgeInsets.all(8.0),
-//                                child: MaterialButton(
-//                                    onPressed: () {},
-//                                    child: Image.asset("images/ggg.png", width: 30,)
-//                                ),
-//                              ),
-//
-//                            ],
-//                          ),
-//                        ),
                             ],
                           )),
                     ),

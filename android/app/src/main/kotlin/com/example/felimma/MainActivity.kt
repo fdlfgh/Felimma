@@ -32,7 +32,6 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback{
 
                 val product = (""+call.argument("productDetails"))
                 val totalCart = (""+call.argument("totalCart"))
-                val deliveryFee = (""+call.argument("deliveryFee"))
 
                 val userId = (""+call.argument("userId"))
                 val userFullName = (""+call.argument("userFullName"))
@@ -43,7 +42,7 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback{
 
                 initMidtransSdk()
                 MidtransSDK.getInstance().transactionRequest = DataCustomer.transactionRequest(
-                    product, totalCart, deliveryFee, userId, userFullName, email, phone
+                        product, totalCart, userId, userFullName, email, phone
                 )
 
                 MidtransSDK.getInstance().startPaymentUiFlow(this)
@@ -72,39 +71,24 @@ class MainActivity: FlutterActivity(), TransactionFinishedCallback{
         if (p0?.response != null){
             when(p0.status){
                 TransactionResult.STATUS_SUCCESS -> {
-                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
-                    Toast.makeText(
-                            this,
-                            "Transaction Finished ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
-                            .show()
+                    channel.invokeMethod("success", p0.response.transactionId)
                 }
+
                 TransactionResult.STATUS_PENDING -> {
-                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
-                    Toast.makeText(
-                            this,
-                            "Transaction Pending ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
-                            .show()
+                    channel.invokeMethod("pending", p0.response.transactionId)
                 }
+
                 TransactionResult.STATUS_FAILED -> {
-                    channel.invokeMethod( "channelFromKotlin", "the argument from Android")
-                    Toast.makeText(
-                            this,
-                            "Transaction Failed ID : " + p0.response.transactionId, Toast.LENGTH_LONG)
-                            .show()
+                    channel.invokeMethod("failed", p0.response.transactionId)
                 }
+
             }
             p0.response.validationMessages
         }else if(p0!!.isTransactionCanceled){
-            Toast.makeText(
-                    this,
-                    "Transaction Canceled", Toast.LENGTH_LONG)
-                    .show()
+            channel.invokeMethod("canceled", "")
         }else{
             if(p0!!.status.equals(TransactionResult.STATUS_INVALID, ignoreCase = true)){
-                Toast.makeText(
-                        this,
-                        "Transaction Invalid", Toast.LENGTH_LONG)
-                        .show()
+                channel.invokeMethod("invalid", "")
             }else{
                 Toast.makeText(
                         this,

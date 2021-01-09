@@ -8,7 +8,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="felimma"
+        android:label="Felimma"
         android:icon="@mipmap/ic_launcher"
         tools:replace="android:label"
         android:theme="@style/AppTheme"
@@ -29,6 +29,11 @@
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
+            android:value="2"
+            />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD4NbXn4XKceAlKbfPRW3KkLmZi_pkloyg"
+            />
     </application>
 </manifest>

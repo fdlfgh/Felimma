@@ -69,12 +69,12 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future signOut() async {
+  /*Future signOut() async {
     _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
     return Future.delayed(Duration.zero);
-  }
+  }*/
 
   Future<void> _onStateChanged(FirebaseUser user) async {
     if (user == null) {

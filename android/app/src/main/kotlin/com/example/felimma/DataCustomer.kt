@@ -24,7 +24,7 @@ object DataCustomer {
 
             val userAddresses: ArrayList<UserAddress> = ArrayList()
             val userAddress = UserAddress()
-            userAddress.address = "Jalan Andalas Gang Sebelah No. 1"
+            userAddress.address = "xxxx"
 //            userAddress.city = "Jakarta"
 //            userAddress.addressType = Constants.ADDRESS_TYPE_BOTH
 //            userAddress.zipcode = "12345"
@@ -39,7 +39,6 @@ object DataCustomer {
     fun transactionRequest(
             productDetail: String,
             totalCart: String,
-            deliveryFee: String,
             userId: String,
             userFullName: String,
             email: String,
@@ -47,7 +46,7 @@ object DataCustomer {
             : TransactionRequest {
 
         // set request
-        val request = TransactionRequest(System.currentTimeMillis().toString() + " ", totalCart.toDouble() + deliveryFee.toDouble())
+        val request = TransactionRequest(System.currentTimeMillis().toString() + " ", totalCart.toDouble())
 
         // set user detail
         customerDetails(userId, userFullName, email, phone)
@@ -59,8 +58,7 @@ object DataCustomer {
         for (i in 0 until product.length()) {
             val details = ItemDetails(
                     product.getJSONObject(i).getString("id"),
-                    product.getJSONObject(i).getString("price").toDouble()
-                            + product.getJSONObject(i).getString("deliveryFee").toDouble(),
+                    product.getJSONObject(i).getString("price").toDouble(),
                     product.getJSONObject(i).getString("qty").toInt(),
                     product.getJSONObject(i).getString("name")
             )

@@ -16,16 +16,18 @@ class ServiceSearchScreen extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: black),
         backgroundColor: white,
-        leading: IconButton(icon: Icon(Icons.close), onPressed: (){
-          Navigator.pop(context);
-        }),
-        title: CustomText(text: "Services", size: 20,),
         elevation: 0.0,
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.shopping_cart), onPressed: (){})
-        ],
+        title: CustomText(
+          text: "Services",
+          weight: FontWeight.bold,
+        ),
+        leading: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
       ),
+      backgroundColor: white,
       body: serviceProvider.servicesSearched.length < 1? Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

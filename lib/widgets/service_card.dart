@@ -73,6 +73,7 @@ class ServiceCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+
                   TextSpan(
                     text: '${service.client} \n',
                     style: TextStyle(
@@ -81,8 +82,12 @@ class ServiceCard extends StatelessWidget {
                     ),
                   ),
                   TextSpan(
-                    text: '${service.category} \n',
-                    style: TextStyle(fontSize: 15),
+                    text: '${service.category} \n\n',
+                    style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                    ),
                   ),
                   TextSpan(
                     text: 'RP${service.price} \t',

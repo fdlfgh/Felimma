@@ -1,5 +1,4 @@
 import 'package:felimma/helpers/style.dart';
-import 'package:felimma/models/cart_item.dart';
 import 'package:felimma/provider/app.dart';
 import 'package:felimma/provider/user.dart';
 import 'package:felimma/services/order.dart';
@@ -8,7 +7,6 @@ import 'package:felimma/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:uuid/uuid.dart';
 
 const CHANNEL = "com.example.felimma";
 const KEY_NATIVE = "showFelimma";
@@ -39,7 +37,6 @@ class _CartScreenState extends State<CartScreen> {
     await platform.invokeMethod(KEY_NATIVE, {
       "productDetails": productDetails,
       "totalCart": totalCart,
-      "deliveryFee": deliveryFee,
       "userId": userId,
       "userFullName": userFullName,
       "email": email,
@@ -52,8 +49,26 @@ class _CartScreenState extends State<CartScreen> {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
 
-    platformFromKotlin.setMethodCallHandler((call){
-      print("Hello from ${call.arguments}");
+    platformFromKotlin.setMethodCallHandler((call) async {
+      if(call.method != "canceled" || call.method != "invalid"){
+        print("=====================================");
+        print("Status         : ${call.method}");
+        print("Transaction ID :  ${call.arguments}");
+
+        var status = call.method;
+        var transactionId = call.arguments;
+
+        await OrderServices().createOrder(
+          userId: userProvider.userModel.id,
+          id: transactionId,
+          description: status,
+          status: status,
+          cart: userProvider.userModel.cart,
+          totalPrice: userProvider.userModel.totalCartPrice
+        );
+
+      }
+
       return null;
     });
 
@@ -63,7 +78,10 @@ class _CartScreenState extends State<CartScreen> {
         iconTheme: IconThemeData(color: black),
         backgroundColor: white,
         elevation: 0.0,
-        title: CustomText(text: "Shopping Cart"),
+        title: CustomText(
+          text: "Shopping Cart",
+          weight: FontWeight.bold,
+        ),
         leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
@@ -113,19 +131,26 @@ class _CartScreenState extends State<CartScreen> {
                               RichText(
                                 text: TextSpan(children: [
                                   TextSpan(
-                                      text: userProvider
-                                              .userModel.cart[index].name +
-                                          "\n",
+                                      text: "\n${userProvider.userModel.cart[index].name}\n",
+                                      style: TextStyle(
+                                          color: black,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold
+                                      )
+                                  ),
+                                  TextSpan(
+                                      text: "Duration: ${userProvider.userModel.cart[index].duration} \n\n",
                                       style: TextStyle(
                                           color: black,
                                           fontSize: 12,
-                                          fontWeight: FontWeight.bold)),
+                                          )
+                                  ),
                                   TextSpan(
                                       text:
                                           "RP${userProvider.userModel.cart[index].price} \n\n",
                                       style: TextStyle(
                                           color: green,
-                                          fontSize: 15,
+                                          fontSize: 17,
                                           fontWeight: FontWeight.bold)),
                                 ]),
                               ),
